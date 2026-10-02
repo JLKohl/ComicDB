@@ -1,0 +1,43 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table tags {
+  tag_id integer [primary key]
+  name varchar(150) [not null, unique]
+  created_at timestamp [default: `now()`]
+}
+
+Table comics {
+  comic_id integer [primary key]
+  title varchar(150) [not null]
+  description text
+  episode int
+  created_at timestamp [default: `now()`]
+}
+
+Table characters {
+  character_id integer [primary key]
+  name varchar(150) [not null]
+  age int
+  gender varchar(20)
+  description text
+  created_at timestamp [default: `now()`]
+}
+
+Table comic_tags {
+  comic_id integer [primary key]
+  tag_id integer [primary key]
+}
+
+Table comic_characters{
+  comic_id integer [primary key]
+  character_id integer [primary key]
+}
+
+Ref: comic_tags.comic_id > comics.comic_id
+
+Ref: comic_tags.tag_id > tags.tag_id
+
+Ref: comic_characters.comic_id > comics.comic_id
+
+Ref: comic_characters.character_id > characters.character_id
