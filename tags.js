@@ -11,7 +11,7 @@ async function getTags() {
         return tags
 
     } catch (error) {
-
+        
         console.log(error)
     }
 }
