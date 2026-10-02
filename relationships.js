@@ -63,6 +63,49 @@ async function unlinkCharacterFromComic(comic_id, character_id) {
     
 }
 
+async function getComicsWithTags(comic_id) {
+
+        try {
+
+        const [result] = await pool.query(
+            `SELECT comics.title, tags.tag_name
+            FROM comics
+            JOIN comic_tags ON comics.comic_id = comic_tags.comic_id
+            JOIN tags ON comic_tags.tag_id = tags.tag_id
+            WHERE comics.comic_id = ?;`,
+            [comic_id]
+        )
+        return result; 
+
+    } catch (error) {
+
+        console.log(error)
+    }
+    
+}
+
+async function getComicsWithCharacters(comic_id) {
+
+        try {
+
+        const [result] = await pool.query(
+            `SELECT comics.title, characters.name
+            FROM comics
+            JOIN comic_characters ON comics.comic_id = comic_characters.comic_id
+            JOIN characters ON comic_characters.character_id = characters.character_id
+            WHERE comics.comic_id = ?;`,
+            [comic_id]
+        )
+        return result; 
+
+    } catch (error) {
+
+        console.log(error)
+    }
+    
+}
+
+
 
 
 
@@ -70,5 +113,7 @@ module.exports = {
     linkTagToComic,
     linkCharacterToComic,
     unlinkTagFromComic,
-    unlinkCharacterFromComic
+    unlinkCharacterFromComic,
+    getComicsWithTags,
+    getComicsWithCharacters
 }
