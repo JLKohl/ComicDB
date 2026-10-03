@@ -90,12 +90,12 @@ async function main() {
         comicTags
     )
 
-    //unlinking the tables so that I can delete to comic
+   //unlinking the tables so that I can delete the comic
     await relationships.unlinkCharacterFromComic(newComicId, newCharacterId);
     await relationships.unlinkTagFromComic(newComicId, newTagId);
 
-    //deleting the unneeded new comic, chatacter and tag from the database
-    //so that the code can be rerun with out issues
+    //deleting the unneeded new comic, character and tag from the database
+    //so that the code can be rerun without issues
     await comics.deleteComic(newComicId);
     await tags.deleteTag(newTagId);
     await characters.deleteCharacter(newCharacterId);
