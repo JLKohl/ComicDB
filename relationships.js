@@ -1,5 +1,9 @@
 const pool = require('./db.js')
 
+
+//This functions links new tags and comics inside of the
+//comic_tags table and returns what rows were affected 
+//by the change
 async function linkTagToComic(comic_id, tag_id) {
     try {
 
@@ -15,6 +19,9 @@ async function linkTagToComic(comic_id, tag_id) {
     
 }
 
+//This function links new characters and comics inside of the
+//comic_characters table and returns what rows were affected
+//by the change
 async function linkCharacterToComic(comic_id, character_id) {
 
         try {
@@ -31,6 +38,8 @@ async function linkCharacterToComic(comic_id, character_id) {
     
 }
 
+//These next two functions will unlink the tags and comics in case you 
+//need to delete any information that was in the tables
 async function unlinkTagFromComic(comic_id, tag_id) {
 
         try {
@@ -63,6 +72,8 @@ async function unlinkCharacterFromComic(comic_id, character_id) {
     
 }
 
+//These next two functions use JOIN to create readable information 
+//for the user when they want to see the associations between the linked tables
 async function getComicsWithTags(comic_id) {
 
         try {
