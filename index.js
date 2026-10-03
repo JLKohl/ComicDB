@@ -5,8 +5,15 @@ const comics = require("./comics.js");
 const characters = require("./characters.js");
 const relationships = require("./relationships.js")
 
+// main() in index.js will run through the process of creating, updating, 
+// finding and deleting a comic. It will also create a new tag and character and link them
+// to the comics through the comic_tags and comic_characters tables. A JOIN will run to display 
+// the information from the associated tables in a readable fashion. Then the links will be 
+// unlinked so that in the end everything can be deleted and the database is back to where it was
+// to start.
+
 async function main() {
-    //funtion returns the id, so the const will 
+    //function returns the id, so the const will 
     //hold the id of the new inserted comic
     // which can be used in the code later.
     const newComicId = await comics.createComic(
@@ -20,19 +27,22 @@ async function main() {
         newComicId
     );
 
+    //grabbing all the comics
     const allComics = await comics.getComics();
 
     console.log(
-        "All of the commics in the database: ",
+        "All of the comics in the database: ",
         allComics
     );
 
+    ///grabbing the new comic by using the comic_id
     const comicById = await comics.getComicById(newComicId);
 
     console.log (
         "New comic retrieved by the Id: ",
         comicById);
 
+    //updating the new comic that was created
     await comics.updateComic(
         newComicId,
         "This is an updated title", 
@@ -45,10 +55,11 @@ async function main() {
     //  would be helpful for a human to read. 
     const updatedComic = await comics.getComicById(newComicId);
     console.log(
-        "Comic is update: ",
+        "Comic is updated: ",
         updatedComic
     );
 
+    //create a character
     const newCharacterId = await characters.createCharacter(
         "Stuart",
         3,
@@ -56,27 +67,30 @@ async function main() {
         "The baby of the family"
     );
 
+    //create a tag
     const newTagId = await tags.createTag(
         "Youngest Child"
     );
 
+    //linking the tables information together
     await relationships.linkCharacterToComic(newComicId, newCharacterId);
 
     await relationships.linkTagToComic(newComicId, newTagId);
 
+    //the next two lines call the functions that will print the relationships in a readable way
     const comicWithCharacters = await relationships.getComicsWithCharacters(newComicId);
     console.log(
-        "Characters realated to comic: ",
+        "Characters related to comic: ",
         comicWithCharacters
     );
 
     const comicTags = await relationships.getComicsWithTags(newComicId);
     console.log(
-        "Tags realted to comic: ",
+        "Tags related to comic: ",
         comicTags
     )
 
-    //unlinking the tables so that i can delete to comic
+    //unlinking the tables so that I can delete to comic
     await relationships.unlinkCharacterFromComic(newComicId, newCharacterId);
     await relationships.unlinkTagFromComic(newComicId, newTagId);
 
@@ -89,7 +103,7 @@ async function main() {
     const updatedDB = await comics.getComics();
 
     console.log(
-        "Comic has been deleted from database: ",
+        "Database (new comic has been deleted): ",
         updatedDB
     );
 
