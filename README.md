@@ -4,7 +4,7 @@ The purpose of this project was to build a relational database that I could use 
 
 This software includes several files that can retrieve, create, update, and delete the information in the different tables in the MySQL database comic_site.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/NUk-y0rkmnw?si=i9IrDzdGeFGULKqJ)
 
 # Relational Database
 
