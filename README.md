@@ -22,8 +22,8 @@ The outline for the database was created on dbdiagram.io
 The relational database was created using MySQL Workbench
 The code was written inside of VS Code
 Claude AI was used for research and some troubleshooting in the index file.
-There was one const completely written by Claude that I used because I wasn't positive how to
-write it. 
+There was one const in index.js completely written by Claude that I used because I wasn't positive how to
+write it, it was useful and taught me how to write better code in the future. 
 
 
 The language used was Node with JavaScript, because this is a language I am most familiar with.
